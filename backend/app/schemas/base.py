@@ -1,0 +1,22 @@
+from pydantic import BaseModel, ConfigDict
+
+
+def to_camel(value: str) -> str:
+    first, *rest = value.split("_")
+    return first + "".join(part.capitalize() for part in rest)
+
+
+class APIModel(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True,
+        from_attributes=True,
+        str_strip_whitespace=True,
+    )
+
+
+class PageMeta(APIModel):
+    page: int
+    page_size: int
+    total: int
+    pages: int

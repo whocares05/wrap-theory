@@ -1,0 +1,12 @@
+{
+  "name": "wrap-theory-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "python -m uvicorn app.main:app --reload --app-dir backend --port 4000",
+    "build": "npm --prefix frontend run build",
+    "test": "python -m pytest backend/tests && npm --prefix frontend test",
+    "lint": "python -m ruff check backend && python -m mypy backend/app && npm --prefix frontend run lint"
+  }
+}
